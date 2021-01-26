@@ -18,7 +18,6 @@ let timer = document.getElementById('timer');
 let modalElement = document.getElementById('gameOverModal');
 let totalGameMovesElement = document.getElementById('totalGameMoves');
 let totalGameTimeElement = document.getElementById('totalGameTime');
-let finalStarRatingElement = document.getElementById('finalStarRating');
 let closeModalIcon = document.getElementById('closeModal');
 let openedCards = [];
 let matchedCards =  [];
@@ -64,10 +63,6 @@ function startGame() {
     //reset moves
     moves = 0;
     counter.innerText = `${moves} move(s)`;
-    //reset star rating
-    for(let i=0; i<starElementsArray.length; i++) {
-        starElementsArray[i].style.opacity = 1;
-    }
     //Reset Timer on game reset
     timer.innerHTML = '0 mins 0 secs';
     clearInterval(interval);
@@ -196,13 +191,12 @@ function startTimer() {
 function endGame() {
     clearInterval(interval);
     totalGameTime = timer.innerHTML;
-    starRating = document.querySelector('.rating').innerHTML;
+     
     //show modal on game end
     modalElement.classList.add("show-modal");
     //show totalGameTime, moves and finalStarRating in Modal
     totalGameTimeElement.innerHTML = totalGameTime;
     totalGameMovesElement.innerHTML = moves;
-    finalStarRatingElement.innerHTML = starRating;
     matchedCards = [];
     closeModal();
 }
