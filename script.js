@@ -200,12 +200,8 @@ function endGame() {
     matchedCards = [];
     closeModal();
 }
-function closeModal() {
-    closeModalIcon.addEventListener("click", function() {
-        modalElement.classList.remove("show-modal");
-        startGame();
-    })
-}
+ 
+
 function playAgain() {
     modalElement.classList.remove("show-modal");
     startGame();

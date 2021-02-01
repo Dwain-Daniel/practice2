@@ -18,8 +18,9 @@ ol, ul {
 em {
     font-style: italic;
 }
-.brown-button {
+.restart-button {
     background-color: red;
+    padding: 0.7em 1.4em;
     -moz-border-radius: 0.2em;
     -webkit-border-radius: 0.2em;
     border-radius: 0.3em;
@@ -28,52 +29,14 @@ em {
     font-weight: bold;
 }
 
-.brown-button:hover {
-    background-color: red;
-}
-.brown-button:active {
-    position: relative;
-    top: 0.15em;
-}
-.brown-button:focus {
-    outline-color: #D7CCC8;
-}
+ 
 h1 {
     text-align: center;
     font-size: 2em;
     padding: 0.6em;
     text-decoration: underline;
 }
-.tool-tip {
-    float: right;
-    margin-top: -3.7em;
-    margin-right: 0.3em;
-    position: relative;
-}
-.tool-tip button {
-    background: none;
-    border: none;
-    color: #000000;
-    font-size: 1.6em;
-    font-weight: 900;
-}
-.tool-tip .tool-tip-text {
-    visibility: hidden;
-    width: 5.5em;
-    background-color: #000000;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 5px 0;
-    position: absolute;
-    top: 2.1em;
-    right: 0;
-    z-index: 1;
-    border-radius: 0.3em;
-}
-.tool-tip:hover .tool-tip-text{
-    visibility: visible;
-    right: 2em
-}
+ 
 .game-status-details {
     display: flex;
     flex-wrap: wrap;
@@ -100,9 +63,7 @@ h1 {
 .star {
     margin-left: -10px;
 }
-.star:first-child{
-    margin-left: 0 !important;;
-}
+ 
 .restart-btn {
     background: none;
     border: none;
@@ -142,9 +103,7 @@ h1 {
     margin: 1.5em auto;
     text-align: center;
 }
-.restart-button {
-    padding: 0.7em 1.4em;
-}
+
 /* Game Over Modal */
 .modal {
     display: none;
