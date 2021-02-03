@@ -135,36 +135,6 @@ function totalMoves() {
         hour = 0;
         startTimer();
     }
-    //setting rating based on moves
-    if(moves > 8 && moves <= 12) {
-        for(let i=0; i<5; i++) {
-            starElementsArray[i].opacity = 1;
-        }
-    } else if(moves > 12 && moves <= 16) {
-        for(let i=0; i<5; i++) {
-            if(i > 3) {
-                starElementsArray[i].style.opacity = 0.1;
-            }
-        }
-    } else if(moves > 16 && moves <= 20) {
-        for(let i=0; i<5; i++) {
-            if(i > 2) {
-                starElementsArray[i].style.opacity = 0.1;
-            }
-        }
-    } else if(moves > 20 && moves <= 24) {
-        for(let i=0; i<5; i++) {
-            if(i > 1) {
-                starElementsArray[i].style.opacity = 0.1;
-            }
-        }
-    } else if(moves > 24){
-        for(let i=0; i<5; i++) {
-            if(i > 0) {
-                starElementsArray[i].style.opacity = 0.1;
-            }
-        }
-    }
 }
 function startTimer() {
     interval = setInterval(function(){

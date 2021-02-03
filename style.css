@@ -46,7 +46,6 @@ h1 {
     padding: 0.3em;
     text-align: center;
 }
-.rating,
 .move-counter,
 .timer,
 .restart-btn {
@@ -203,8 +202,8 @@ h1 {
 .show-overlay {
     display: block;
 }
-/* How to Play Modal */
-.modal-body .help-tips {
+/* How to Play overlay */
+.overlay-body .help-tips {
     padding: 0 1.5em;
 }
 /* Animations */
@@ -288,7 +287,7 @@ h1 {
 }
 /* Media Queries */
 @media only screen and (max-width: 600px) {
-    .modal-footer button {
+    .overlay-footer button {
         padding: 0.3em 0.3em;
         width: 50%;
     }
@@ -298,8 +297,8 @@ h1 {
         width: 5em;
         height: 5em;
     }
-    /* How to Play Modal */
-    .modal-body .help-tips {
+    /* How to Play overlay */
+    .overlay-body .help-tips {
         padding: 0 2em;
     }
 }
@@ -308,8 +307,8 @@ h1 {
         width: 5.5em;
         height: 5.5em;
     }
-    /* How to Play Modal */
-    .modal-body .help-tips {
+    /* How to Play overlay */
+    .overlay-body .help-tips {
         padding: 0 2.5em;
     }
 }
@@ -317,7 +316,6 @@ h1 {
     .game-status-details {
         display: block;
     }
-    .rating,
     .move-counter,
     .timer,
     .restart-btn {
@@ -327,8 +325,8 @@ h1 {
         width: 6em;
         height: 6em;
     }
-    /* How to Play Modal */
-    .modal-body .help-tips {
+    /* How to Play overlay */
+    .overlay-body .help-tips {
         padding: 0 3em;
     }
 }
