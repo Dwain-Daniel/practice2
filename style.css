@@ -105,7 +105,7 @@ h1 {
 }
 
 /* Game Over Modal */
-.modal {
+.overlay {
     display: none;
     position: fixed;
     z-index: 1;
@@ -117,7 +117,7 @@ h1 {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
-.modal-content {
+.overlay-content {
     width: 80%;
     margin: auto;
     padding: 0;
@@ -129,32 +129,29 @@ h1 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation: animateTop 0.4s;
 }
-.modal-header {
+.overlay-header {
     border-bottom: 1px solid #D7CCC8;
     padding: 0.6em 1em;
     font-size: 1.5em;
     font-weight: bold;
 }
-.modal-body {
+.overlay-body {
     padding: 1.6em 0.3em 1em;
 }
-.modal-body .message {
+.overlay-body .message {
     text-align: center;
 }
-.modal-body .message p {
+.overlay-body .message p {
     margin-bottom: 0.5em;
 }
-.game-over-icons {
-    animation: animateIcons 3s linear infinite;
-    position: relative;
-}
-.modal-footer {
+
+.overlay-footer {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     padding: 0 1em 1.5em;
 }
-.modal-footer button {
+.overlay-footer button {
     padding: 0.3em 1em;
     width: 50%;
 }
@@ -166,7 +163,6 @@ h1 {
     font-weight: bold;
     color: #3E2723;
     position: relative;
-    animation: animateCloseIcon 5s linear 2s infinite;
 }
 .close:hover, .close:focus {
     color: #8D6E63;
@@ -204,7 +200,7 @@ h1 {
 .disabled {
     pointer-events: none;
 }
-.show-modal {
+.show-overlay {
     display: block;
 }
 /* How to Play Modal */

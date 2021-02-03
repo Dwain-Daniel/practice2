@@ -1,33 +1,25 @@
-//Show Instructions
-const helpModal = document.getElementById('helpModal');
-function openHelpModal() {
-    helpModal.classList.add('show-modal');
-}
-function closeHelpModal() {
-    helpModal.classList.remove('show-modal');
-}
 // Main Game Play
-let cardElements = document.getElementsByClassName('game-card');
-let cardElementsArray = [...cardElements];
-let imgElements = document.getElementsByClassName('game-card-img');
-let imgElementsArray = [...imgElements];
+let cards = document.getElementsByClassName('game-card');
+let cardsArray = [...cards];
+let cardFace = document.getElementsByClassName('game-card-img');
+let cardFaceArray = [...cardFace];
 let starElements = document.getElementsByClassName('star');
 let starElementsArray = [...starElements];
 let counter = document.getElementById('moveCounter');
 let timer = document.getElementById('timer');
-let modalElement = document.getElementById('gameOverModal');
-let totalGameMovesElement = document.getElementById('totalGameMoves');
-let totalGameTimeElement = document.getElementById('totalGameTime');
-let closeModalIcon = document.getElementById('closeModal');
-let openedCards = [];
+let overlayElement = document.getElementById('gameOverOverlay');
+let totalMovesMade = document.getElementById('totalGameMoves');
+let totalTimeTaken = document.getElementById('totalGameTime');
+let closeOverlayIcon = document.getElementById('closeOverlay');
+let flippedCards = [];
 let matchedCards =  [];
 let moves;
-let second = 0,
-    minute = 0,
-    hour = 0,
-    interval,
-    totalGameTime,
-    starRating;
+let second = 0;
+let minute = 0;
+let hour = 0;
+let interval;
+let totalGameTime;
+let starRating;
 function shuffle(array) {
     let currentIndex = array.length,
         temporaryValue,
@@ -43,23 +35,23 @@ function shuffle(array) {
 }
 function startGame() {
     //shuffle cards
-    let shuffledImages = shuffle(imgElementsArray);
+    let shuffledImages = shuffle(cardFaceArray);
     for(i=0; i<shuffledImages.length; i++) {
         //remove all images from previous games from each card (if any)
-        cardElements[i].innerHTML = "";
+        cards[i].innerHTML = "";
         //add the shuffled images to each card
-        cardElements[i].appendChild(shuffledImages[i]);
-        cardElements[i].type = `${shuffledImages[i].alt}`;
+        cards[i].appendChild(shuffledImages[i]);
+        cards[i].type = `${shuffledImages[i].alt}`;
         //remove all extra classes for game play
-        cardElements[i].classList.remove("show", "open", "match", "disabled");
-        cardElements[i].children[0].classList.remove("show-img");
+        cards[i].classList.remove("show", "open", "match", "disabled");
+        cards[i].children[0].classList.remove("show-img");
     }
     //listen for events on the cards
-    for(let i = 0; i < cardElementsArray.length; i++) {
-        cardElementsArray[i].addEventListener("click", displayCard)
+    for(let i = 0; i < cardsArray.length; i++) {
+        cardsArray[i].addEventListener("click", displayCard)
     }
     //when game starts show all the cards for a split second
-    flashCards();
+    quickDisplay();
     //reset moves
     moves = 0;
     counter.innerText = `${moves} move(s)`;
@@ -67,13 +59,13 @@ function startGame() {
     timer.innerHTML = '0 mins 0 secs';
     clearInterval(interval);
 }
-function flashCards() {
-    for(i=0; i<cardElements.length; i++) {
-        cardElements[i].children[0].classList.add("show-img")
+function quickDisplay() {
+    for(i=0; i<cards.length; i++) {
+        cards[i].children[0].classList.add("show-img")
     }
     setTimeout(function(){
-        for(i=0; i<cardElements.length; i++) {
-            cardElements[i].children[0].classList.remove("show-img")
+        for(i=0; i<cards.length; i++) {
+            cards[i].children[0].classList.remove("show-img")
         }
     }, 1000)
 }
@@ -82,59 +74,59 @@ function displayCard() {
     this.classList.toggle("open");
     this.classList.toggle("show");
     this.classList.toggle("disabled");
-    cardOpen(this);
+    clickedCard(this);
 }
-function cardOpen(card) {
-    openedCards.push(card);
-    let len = openedCards.length;
+function clickedCard(card) {
+    flippedCards.push(card);
+    let len = flippedCards.length;
     if(len === 2) {
-        moveCounter();
-        if(openedCards[0].type === openedCards[1].type) {
-            matched();
+        totalMoves();
+        if(flippedCards[0].type === flippedCards[1].type) {
+            matchingCards();
         } else {
-            unmatched();
+            nonMatchingCards();
         }
     }
 }
-function matched() {
-    openedCards[0].classList.add("match");
-    openedCards[1].classList.add("match");
-    openedCards[0].classList.remove("show", "open");
-    openedCards[1].classList.remove("show", "open");
-    matchedCards.push(openedCards[0]);
-    matchedCards.push(openedCards[1]);
-    openedCards = [];
+function matchingCards() {
+    flippedCards[0].classList.add("match");
+    flippedCards[1].classList.add("match");
+    flippedCards[0].classList.remove("show", "open");
+    flippedCards[1].classList.remove("show", "open");
+    matchedCards.push(flippedCards[0]);
+    matchedCards.push(flippedCards[1]);
+    flippedCards = [];
     if(matchedCards.length == 16) {
         endGame();
     }
 }
-function unmatched() {
-    openedCards[0].classList.add("unmatched");
-    openedCards[1].classList.add("unmatched");
-    disable();
+function nonMatchingCards() {
+    flippedCards[0].classList.add("unmatched");
+    flippedCards[1].classList.add("unmatched");
+    disableCard();
     setTimeout(function() {
-        openedCards[0].classList.remove("show", "open", "unmatched");
-        openedCards[1].classList.remove("show", "open", "unmatched");
-        openedCards[0].children[0].classList.remove('show-img');
-        openedCards[1].children[0].classList.remove('show-img');
-        enable();
-        openedCards = [];
+        flippedCards[0].classList.remove("show", "open", "unmatched");
+        flippedCards[1].classList.remove("show", "open", "unmatched");
+        flippedCards[0].children[0].classList.remove('show-img');
+        flippedCards[1].children[0].classList.remove('show-img');
+        enableCard();
+        flippedCards = [];
     }, 1100)
 }
-function disable() {
-    cardElementsArray.filter((card, i, cardElementsArray) => {
+function disableCard() {
+    cardsArray.filter((card, i, cardsArray) => {
         card.classList.add('disabled');
     })
 }
-function enable() {
-    cardElementsArray.filter((card, i, cardElementsArray) => {
+function enableCard() {
+    cardsArray.filter((card, i, cardsArray) => {
         card.classList.remove('disabled');
         for(let i=0; i<matchedCards.length; i++) {
             matchedCards[i].classList.add('disabled');
         }
     })
 }
-function moveCounter() {
+function totalMoves() {
     moves++;
     counter.innerHTML = `${moves} move(s)`;
     if(moves == 1) {
@@ -193,17 +185,17 @@ function endGame() {
     totalGameTime = timer.innerHTML;
      
     //show modal on game end
-    modalElement.classList.add("show-modal");
+    overlayElement.classList.add("show-overlay");
     //show totalGameTime, moves and finalStarRating in Modal
-    totalGameTimeElement.innerHTML = totalGameTime;
-    totalGameMovesElement.innerHTML = moves;
+    totalTimeTaken.innerHTML = totalGameTime;
+    totalMovesMade.innerHTML = moves;
     matchedCards = [];
-    closeModal();
+    closeOverlay();
 }
  
 
 function playAgain() {
-    modalElement.classList.remove("show-modal");
+    overlayElement.classList.remove("show-overlay");
     startGame();
 }
 // wait for some milliseconds before game starts
